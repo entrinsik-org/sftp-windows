@@ -1,0 +1,14 @@
+{
+  "name": "@entrinsik/informer-sftp-windows",
+  "version": "1.0.1",
+  "description": "A better sftp job exporter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andrew Morovati",
+  "dependencies": {
+    "node-ssh": "^5.1.0"
+  }
+}
