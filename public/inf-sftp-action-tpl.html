@@ -1,0 +1,71 @@
+<div layout="column" class="padded bottom-margin" inf-top-state-color class="inf-sftp-action">
+
+    <div layout="row" layout-align="start center">
+        <md-subheader class="md-no-sticky" inf-top-state-color flex>
+            SFTP connection
+        </md-subheader>
+        <inf-expand-collapse tooltip="connection form" ng-model="ctrl.showMore"></inf-expand-collapse>
+    </div>
+
+    <div class="sub-editor ng-hide clickable" ng-show="!ctrl.showMore" ng-click="ctrl.showMore = true">
+        {{ ctrl.opts.connection | sftpConnectionLabel }}
+    </div>
+
+    <div class="sub-editor" layout="column" ng-show="ctrl.showMore">
+
+        <div layout layout-wrap>
+            <md-input-container flex="50" flex-xs="100">
+                <label>Host</label>
+                <input type="text" ng-model="ctrl.opts.connection.host" placeholder="localhost">
+            </md-input-container>
+            <md-input-container flex="50" flex-xs="100">
+                <label>Port</label>
+                <input type="number" ng-model="ctrl.opts.connection.port"
+                       placeholder="{{ ctrl.opts.connection.protocol === 'sftp' ? '22' : '21' }}">
+            </md-input-container>
+        </div>
+
+        <md-input-container>
+            <label>Remote Directory</label>
+            <input type="text" ng-model="ctrl.opts.connection.remoteDir">
+        </md-input-container>
+
+        <div layout layout-wrap >
+            <md-input-container flex="100" flex-xs="100">
+                <label>Username</label>
+                <input type="text" ng-model="ctrl.opts.connection.username" autocomplete="new-username">
+            </md-input-container>
+            <md-input-container flex="100" flex-xs="100">
+                <md-radio-group ng-model="ctrl.opts.authMode" layout="row" class="top-margin bottom-margin">
+                    <md-radio-button value="password">Password</md-radio-button>
+                    <md-radio-button value="path">Path to Key</md-radio-button>
+                    <md-radio-button value="key">Raw Key Text</md-radio-button>
+                    <md-radio-button value="none">No Authentication</md-radio-button>
+                </md-radio-group>
+            </md-input-container>
+            <md-input-container flex="100" flex-xs="100" ng-if="ctrl.opts.authMode === 'password'">
+                <label>Password</label>
+                <input required type="password" ng-model="ctrl.opts.connection.password" autocomplete="new-password">
+            </md-input-container>
+            <md-input-container flex="100" flex-xs="100" ng-if="ctrl.opts.authMode === 'path'">
+                <label>Path to Key</label>
+                <input required type="text" ng-model="ctrl.opts.connection.privateKeyPath">
+            </md-input-container>
+            <md-input-container flex="100" flex-xs="100" ng-if="ctrl.opts.authMode === 'key'">
+                <label>Raw Key Text</label>
+                <textarea required ng-model="ctrl.opts.connection.rawPrivateKey" columns="1" rows="10"></textarea>
+            </md-input-container>
+        </div>
+    </div>
+
+    <div layout="column" inf-action-attachments="ctrl.opts" class="top-margin">
+        <div layout="row" layout-align="start center">
+            <inf-add-action-attachment></inf-add-action-attachment>
+            <md-subheader inf-top-state-color class="md-no-sticky">Files to send</md-subheader>
+        </div>
+
+        <md-divider></md-divider>
+        <inf-action-attachments-list></inf-action-attachments-list>
+        <md-divider></md-divider>
+    </div>
+</div>

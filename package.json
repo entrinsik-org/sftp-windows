@@ -1,6 +1,6 @@
 {
   "name": "@entrinsik/informer-sftp-windows",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A better sftp job exporter",
   "main": "index.js",
   "scripts": {
